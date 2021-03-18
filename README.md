@@ -37,6 +37,8 @@ dependencies:
 ## Simple usage
 
 ```dart
+// replace flutter_google_places by flutter_google_places_hoc081098
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 
 const kGoogleApiKey = 'API_KEY';
 
