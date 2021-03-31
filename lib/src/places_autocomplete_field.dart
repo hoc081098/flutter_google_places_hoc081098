@@ -38,7 +38,7 @@ class PlacesAutocompleteField extends StatefulWidget {
   /// null.
   const PlacesAutocompleteField({
     Key? key,
-    required this.apiKey,
+    this.apiKey,
     this.controller,
     this.leading,
     this.hint = 'Search',
@@ -84,7 +84,7 @@ class PlacesAutocompleteField extends StatefulWidget {
   /// See also:
   ///
   /// * <https://developers.google.com/places/web-service/autocomplete>
-  final String apiKey;
+  final String? apiKey;
 
   /// The decoration to show around the text field.
   ///
