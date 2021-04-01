@@ -48,7 +48,7 @@ class PlacesAutocompleteWidget extends StatefulWidget {
 
   PlacesAutocompleteWidget(
       {Key? key,
-      this.apiKey,
+      required this.apiKey,
       this.mode = Mode.fullscreen,
       this.hint = 'Search',
       this.overlayBorderRadius,
@@ -71,7 +71,7 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       this.headers})
       : super(key: key) {
         if (apiKey == null && proxyBaseUrl == null) {
-          throw 'One of `apiKey` and `proxyBaseUrl` fields is required';
+          throw ArgumentError('One of `apiKey` and `proxyBaseUrl` fields is required');
         }
       }
 
@@ -553,7 +553,7 @@ class _SearchState {
 class PlacesAutocomplete {
   static Future<Prediction?> show(
       {required BuildContext context,
-      String? apiKey,
+      required String? apiKey,
       Mode mode = Mode.fullscreen,
       String? hint = 'Search',
       BorderRadius? overlayBorderRadius,

@@ -38,7 +38,7 @@ class PlacesAutocompleteField extends StatefulWidget {
   /// null.
   const PlacesAutocompleteField({
     Key? key,
-    this.apiKey,
+    required this.apiKey,
     this.controller,
     this.leading,
     this.hint = 'Search',
