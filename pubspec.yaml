@@ -10,10 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_api_headers: ^1.0.0
+  google_api_headers: ^1.1.0
   google_maps_webservice: ^0.0.20-nullsafety.5
   http: ^0.13.3
-  rxdart: ^0.27.0
+  rxdart: ^0.27.1
   listenable_stream: ^1.1.0
   collection: ^1.15.0
 

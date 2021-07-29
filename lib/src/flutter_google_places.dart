@@ -33,6 +33,12 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   final Duration? debounce;
   final Map<String, String>? headers;
 
+  /// Decoration for search text field
+  final InputDecoration? textDecoration;
+
+  /// Text style for search text field
+  final TextStyle? textStyle;
+
   /// optional - sets 'proxy' value in google_maps_webservice
   ///
   /// In case of using a proxy the baseUrl can be set.
@@ -68,7 +74,9 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       this.httpClient,
       this.startText,
       this.debounce,
-      this.headers})
+      this.headers,
+      this.textDecoration,
+      this.textStyle})
       : super(key: key) {
     if (apiKey == null && proxyBaseUrl == null) {
       throw ArgumentError(
@@ -92,8 +100,11 @@ class _PlacesAutocompleteScaffoldState extends PlacesAutocompleteState {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-        title: AppBarPlacesAutoCompleteTextField(
-            textDecoration: null, textStyle: null));
+      title: AppBarPlacesAutoCompleteTextField(
+        textDecoration: widget.textDecoration,
+        textStyle: widget.textStyle,
+      ),
+    );
     final body = PlacesAutocompleteResult(
       onTap: Navigator.of(context).pop,
       logo: widget.logo,
@@ -574,7 +585,9 @@ class PlacesAutocomplete {
       String? startText,
       Duration? debounce,
       Location? origin,
-      Map<String, String>? headers}) {
+      Map<String, String>? headers,
+      InputDecoration? textDecoration,
+      TextStyle? textStyle}) {
     final builder = (BuildContext context) => PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
@@ -597,6 +610,8 @@ class PlacesAutocomplete {
           debounce: debounce,
           origin: origin,
           headers: headers,
+          textDecoration: textDecoration,
+          textStyle: textStyle,
         );
 
     if (mode == Mode.overlay) {
