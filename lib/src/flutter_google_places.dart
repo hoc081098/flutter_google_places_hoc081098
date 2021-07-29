@@ -252,8 +252,11 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: BoxConstraints(maxHeight: 2.0),
-        child: LinearProgressIndicator());
+      constraints: BoxConstraints(maxHeight: 2.0),
+      child: LinearProgressIndicator(
+        color: Theme.of(context).colorScheme.secondary,
+      ),
+    );
   }
 }
 
@@ -313,7 +316,7 @@ class _AppBarPlacesAutoCompleteTextFieldState
 
     return Container(
         alignment: Alignment.topLeft,
-        margin: EdgeInsets.only(top: 4.0),
+        margin: EdgeInsets.only(top: 2.0),
         child: TextField(
           controller: state._queryTextController,
           autofocus: true,
