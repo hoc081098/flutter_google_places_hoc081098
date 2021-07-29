@@ -565,7 +565,7 @@ class _SearchState {
       '_SearchState{text: $text, isSearching: $isSearching, response: $response}';
 }
 
-class PlacesAutocomplete {
+abstract class PlacesAutocomplete {
   static Future<Prediction?> show(
       {required BuildContext context,
       required String? apiKey,

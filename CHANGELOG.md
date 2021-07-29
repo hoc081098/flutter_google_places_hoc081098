@@ -1,5 +1,15 @@
 # flutter_google_places_hoc081098 changelog
 
+## 1.0.0-nullsafety.3 - Jul 29, 2021
+
+- Update dependencies to latest release
+    - `rxdart: ^0.27.1`
+    - `google_api_headers: ^1.1.0`
+
+- Add two params to `PlacesAutocomplete.show` and `PlacesAutocompleteWidget`:
+    - `InputDecoration? textDecoration`
+    - `TextStyle? textStyle`
+
 ## 1.0.0-nullsafety.2 - May 9, 2021
 
 -   Update dependencies to latest release
