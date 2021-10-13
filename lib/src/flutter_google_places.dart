@@ -36,7 +36,7 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   /// This defines the space between the screen's edges and the dialog.
   /// This is only used in Mode.overlay.
   final EdgeInsets? insetPadding;
-  final IconData? backArrowIcon;
+  final Widget? backArrowIcon;
 
   /// Decoration for search text field
   final InputDecoration? textDecoration;
@@ -241,8 +241,8 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
     );
   }
 
-  Icon get _iconBack {
-    if (widget.backArrowIcon != null) return Icon(widget.backArrowIcon);
+  Widget get _iconBack {
+    if (widget.backArrowIcon != null) return widget.backArrowIcon!;
     return Theme.of(context).platform == TargetPlatform.iOS
         ? Icon(Icons.arrow_back_ios)
         : Icon(Icons.arrow_back);
@@ -619,7 +619,7 @@ abstract class PlacesAutocomplete {
       TextStyle? textStyle,
       Color? cursorColor,
       EdgeInsets? insetPadding,
-      IconData? backArrowIcon}) {
+      Widget? backArrowIcon}) {
     final builder = (BuildContext context) => PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
