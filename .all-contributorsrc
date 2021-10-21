@@ -13,6 +13,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "corentingiraud",
+      "name": "Corentin Giraud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29222996?v=4",
+      "profile": "https://corentin.giraud.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
