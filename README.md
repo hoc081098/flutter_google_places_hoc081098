@@ -75,7 +75,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/hoc081098/"><img src="https://avatars.githubusercontent.com/u/36917223?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Petrus Nguyễn Thái Học</b></sub></a><br /><a href="https://github.com/hoc081098/flutter_google_places/commits?author=hoc081098" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/hoc081098/"><img src="https://avatars.githubusercontent.com/u/36917223?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Petrus Nguyễn Thái Học</b></sub></a><br /><a href="https://github.com/hoc081098/flutter_google_places/commits?author=hoc081098" title="Code">💻</a> <a href="#maintenance-hoc081098" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://corentin.giraud.dev/"><img src="https://avatars.githubusercontent.com/u/29222996?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Corentin Giraud</b></sub></a><br /><a href="https://github.com/hoc081098/flutter_google_places/commits?author=corentingiraud" title="Code">💻</a></td>
   </tr>
 </table>
