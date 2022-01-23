@@ -8,7 +8,7 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:http/http.dart';
 import 'package:listenable_stream/listenable_stream.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart_ext/state_stream.dart';
 
 class PlacesAutocompleteWidget extends StatefulWidget {
   final String? apiKey;
@@ -176,8 +176,8 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
           Padding(
             padding: const EdgeInsets.only(top: 48.0),
             child: StreamBuilder<_SearchState>(
-              stream: state$,
-              initialData: state,
+              stream: _state$,
+              initialData: _state$.value,
               builder: (context, snapshot) {
                 final state = snapshot.requireData;
 
@@ -291,8 +291,8 @@ class PlacesAutocompleteResult extends StatelessWidget {
     final state = PlacesAutocompleteWidget.of(context);
 
     return StreamBuilder<_SearchState>(
-      stream: state.state$,
-      initialData: state.state,
+      stream: state._state$,
+      initialData: state._state$.value,
       builder: (context, snapshot) {
         final state = snapshot.requireData;
 
@@ -447,52 +447,58 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
           extentOffset: widget.startText?.length ?? 0,
         );
 
-  GoogleMapsPlaces? _places;
-
-  late final Stream<_SearchState> state$;
-  var state = _SearchState(false, null, '');
-  StreamSubscription<_SearchState>? subscription;
+  late final StateConnectableStream<_SearchState> _state$;
+  StreamSubscription<void>? _subscription;
 
   @override
   void initState() {
     super.initState();
 
-    _initPlaces();
-    state$ = _queryTextController
-        .toValueStream(replayValue: true)
-        .map((event) => event.text)
-        .debounceTime(widget.debounce ?? const Duration(milliseconds: 300))
-        .where((s) => s.isNotEmpty && _places != null)
-        .distinct()
-        .switchMap(doSearch)
-        .doOnData((event) => state = event)
-        .share();
-    subscription = state$.listen(null);
+    _state$ = Rx.fromCallable(const GoogleApiHeaders().getHeaders)
+        .exhaustMap(createGoogleMapsPlaces)
+        .exhaustMap(
+          (places) => _queryTextController
+              .toValueStream(replayValue: true)
+              .map((v) => v.text)
+              .debounceTime(
+                  widget.debounce ?? const Duration(milliseconds: 300))
+              .where((s) => s.isNotEmpty)
+              .distinct()
+              .switchMap((s) => doSearch(s, places)),
+        )
+        .publishState(const _SearchState(false, null, ''));
+    _subscription = _state$.connect();
   }
 
-  Future<void> _initPlaces() async {
-    final headers = await const GoogleApiHeaders().getHeaders();
-
+  Stream<GoogleMapsPlaces> createGoogleMapsPlaces(Map<String, String> headers) {
     assert(() {
       debugPrint('[flutter_google_places_hoc081098] headers=$headers');
       return true;
     }());
 
-    if (!mounted) {
-      return;
-    }
-    _places = GoogleMapsPlaces(
-      apiKey: widget.apiKey,
-      baseUrl: widget.proxyBaseUrl,
-      httpClient: widget.httpClient,
-      apiHeaders: <String, String>{
-        ...headers,
-        ...?widget.headers,
+    return Rx.using(
+      () => GoogleMapsPlaces(
+        apiKey: widget.apiKey,
+        baseUrl: widget.proxyBaseUrl,
+        httpClient: widget.httpClient,
+        apiHeaders: <String, String>{
+          ...headers,
+          ...?widget.headers,
+        },
+      ),
+      (GoogleMapsPlaces places) =>
+          Rx.never<GoogleMapsPlaces>().startWith(places),
+      (GoogleMapsPlaces places) {
+        assert(() {
+          debugPrint('[flutter_google_places_hoc081098] disposed');
+          return true;
+        }());
+        return places.dispose();
       },
     );
   }
 
-  Stream<_SearchState> doSearch(String value) async* {
+  Stream<_SearchState> doSearch(String value, GoogleMapsPlaces places) async* {
     yield _SearchState(true, null, value);
 
     assert(() {
@@ -502,7 +508,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
     }());
 
     try {
-      final res = await _places!.autocomplete(
+      final res = await places.autocomplete(
         value,
         offset: widget.offset,
         location: widget.location,
@@ -545,12 +551,9 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
 
   @override
   void dispose() {
-    subscription?.cancel();
-    subscription = null;
+    _subscription?.cancel();
+    _subscription = null;
     _queryTextController.dispose();
-
-    _places?.dispose();
-    _places = null;
 
     super.dispose();
   }
@@ -587,7 +590,7 @@ class _SearchState {
   final bool isSearching;
   final PlacesAutocompleteResponse? response;
 
-  _SearchState(this.isSearching, this.response, this.text);
+  const _SearchState(this.isSearching, this.response, this.text);
 
   @override
   String toString() =>
