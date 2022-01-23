@@ -212,13 +212,13 @@ class _LocationAutocompleteFieldState extends State<PlacesAutocompleteField> {
           )
         : Text(
             widget.hint ?? '',
-            style: TextStyle(color: Colors.black38),
+            style: const TextStyle(color: Colors.black38),
           );
 
     Widget child = Row(
       children: <Widget>[
-        widget.leading ?? SizedBox(),
-        SizedBox(
+        widget.leading ?? const SizedBox(),
+        const SizedBox(
           width: 16.0,
         ),
         Expanded(
@@ -234,7 +234,7 @@ class _LocationAutocompleteFieldState extends State<PlacesAutocompleteField> {
                         color: Colors.grey,
                       ),
               )
-            : SizedBox()
+            : const SizedBox()
       ],
     );
 

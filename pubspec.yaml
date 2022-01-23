@@ -5,23 +5,23 @@ homepage: https://github.com/hoc081098/flutter_google_places
 repository: https://github.com/hoc081098/flutter_google_places
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=2.2.0'
+  sdk: '>=2.14.0 <3.0.0'
+  flutter: '>=2.5.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  google_api_headers: ^1.1.0
+  google_api_headers: ^1.1.1
   google_maps_webservice: ^0.0.20-nullsafety.5
   http: ^0.13.3
-  rxdart: ^0.27.1
+  rxdart: ^0.27.2
   listenable_stream: ^1.1.0
   collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.11.0
+  flutter_lints: ^1.0.4
 
 flutter:
   assets:

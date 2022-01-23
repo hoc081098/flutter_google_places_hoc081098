@@ -3,7 +3,6 @@ library flutter_google_places_hoc081098.src;
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -88,12 +87,10 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   }
 
   @override
-  State<PlacesAutocompleteWidget> createState() {
-    if (mode == Mode.fullscreen) {
-      return _PlacesAutocompleteScaffoldState();
-    }
-    return _PlacesAutocompleteOverlayState();
-  }
+  // ignore: no_logic_in_create_state
+  State<PlacesAutocompleteWidget> createState() => mode == Mode.fullscreen
+      ? _PlacesAutocompleteScaffoldState()
+      : _PlacesAutocompleteOverlayState();
 
   static PlacesAutocompleteState of(BuildContext context) =>
       context.findAncestorStateOfType<PlacesAutocompleteState>()!;
@@ -123,10 +120,10 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
     final theme = Theme.of(context);
 
     final headerTopLeftBorderRadius =
-        widget.overlayBorderRadius?.topLeft ?? Radius.circular(2);
+        widget.overlayBorderRadius?.topLeft ?? const Radius.circular(2);
 
     final headerTopRightBorderRadius =
-        widget.overlayBorderRadius?.topRight ?? Radius.circular(2);
+        widget.overlayBorderRadius?.topRight ?? const Radius.circular(2);
 
     final header = Column(children: <Widget>[
       Material(
@@ -154,14 +151,14 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
               ),
             ],
           )),
-      Divider()
+      const Divider(),
     ]);
 
     final bodyBottomLeftBorderRadius =
-        widget.overlayBorderRadius?.bottomLeft ?? Radius.circular(2);
+        widget.overlayBorderRadius?.bottomLeft ?? const Radius.circular(2);
 
     final bodyBottomRightBorderRadius =
-        widget.overlayBorderRadius?.bottomRight ?? Radius.circular(2);
+        widget.overlayBorderRadius?.bottomRight ?? const Radius.circular(2);
 
     final container = Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
@@ -169,7 +166,7 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
         children: <Widget>[
           header,
           Padding(
-            padding: EdgeInsets.only(top: 48.0),
+            padding: const EdgeInsets.only(top: 48.0),
             child: StreamBuilder<_SearchState>(
               stream: state$,
               initialData: state,
@@ -222,14 +219,15 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
     );
 
     if (Theme.of(context).platform == TargetPlatform.iOS) {
-      return Padding(padding: EdgeInsets.only(top: 8.0), child: container);
+      return Padding(
+          padding: const EdgeInsets.only(top: 8.0), child: container);
     }
     return container;
   }
 
   Icon get _iconBack => Theme.of(context).platform == TargetPlatform.iOS
-      ? Icon(Icons.arrow_back_ios)
-      : Icon(Icons.arrow_back);
+      ? const Icon(Icons.arrow_back_ios)
+      : const Icon(Icons.arrow_back);
 
   Widget _textField(BuildContext context) => TextField(
         controller: _queryTextController,
@@ -256,7 +254,7 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 2.0),
+      constraints: const BoxConstraints(maxHeight: 2.0),
       child: LinearProgressIndicator(
         color: Theme.of(context).colorScheme.secondary,
       ),
@@ -268,7 +266,9 @@ class PlacesAutocompleteResult extends StatelessWidget {
   final ValueChanged<Prediction> onTap;
   final Widget? logo;
 
-  PlacesAutocompleteResult({required this.onTap, required this.logo});
+  const PlacesAutocompleteResult(
+      {Key? key, required this.onTap, required this.logo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +304,7 @@ class AppBarPlacesAutoCompleteTextField extends StatefulWidget {
   final TextStyle? textStyle;
   final Color? cursorColor;
 
-  AppBarPlacesAutoCompleteTextField({
+  const AppBarPlacesAutoCompleteTextField({
     Key? key,
     required this.textDecoration,
     required this.textStyle,
@@ -324,7 +324,7 @@ class _AppBarPlacesAutoCompleteTextFieldState
 
     return Container(
         alignment: Alignment.topLeft,
-        margin: EdgeInsets.only(top: 2.0),
+        margin: const EdgeInsets.only(top: 2.0),
         child: TextField(
           controller: state._queryTextController,
           autofocus: true,
@@ -374,7 +374,7 @@ class PoweredByGoogleImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Image.asset(
             Theme.of(context).brightness == Brightness.light
                 ? _poweredByGoogleWhite
@@ -389,7 +389,9 @@ class PredictionsListView extends StatelessWidget {
   final List<Prediction> predictions;
   final ValueChanged<Prediction> onTap;
 
-  PredictionsListView({required this.predictions, required this.onTap});
+  const PredictionsListView(
+      {Key? key, required this.predictions, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -405,12 +407,14 @@ class PredictionTile extends StatelessWidget {
   final Prediction prediction;
   final ValueChanged<Prediction> onTap;
 
-  PredictionTile({required this.prediction, required this.onTap});
+  const PredictionTile(
+      {Key? key, required this.prediction, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.location_on),
+      leading: const Icon(Icons.location_on),
       title: Text(prediction.description ?? ''),
       onTap: () => onTap(prediction),
     );
@@ -451,7 +455,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
   }
 
   Future<void> _initPlaces() async {
-    final headers = await GoogleApiHeaders().getHeaders();
+    final headers = await const GoogleApiHeaders().getHeaders();
 
     assert(() {
       debugPrint('[flutter_google_places_hoc081098] headers=$headers');
@@ -601,7 +605,7 @@ abstract class PlacesAutocomplete {
       InputDecoration? textDecoration,
       TextStyle? textStyle,
       Color? cursorColor}) {
-    final builder = (BuildContext context) => PlacesAutocompleteWidget(
+    Widget builder(BuildContext context) => PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
           overlayBorderRadius: overlayBorderRadius,
