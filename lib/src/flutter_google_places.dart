@@ -180,6 +180,7 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
               initialData: _state$.value,
               builder: (context, snapshot) {
                 final state = snapshot.requireData;
+                final response = state.response;
 
                 if (state.isSearching) {
                   return Stack(
@@ -187,8 +188,8 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
                     children: <Widget>[_Loader()],
                   );
                 } else if (state.text.isEmpty ||
-                    state.response == null ||
-                    state.response!.predictions.isEmpty) {
+                    response == null ||
+                    response.predictions.isEmpty) {
                   return Material(
                     color: theme.dialogBackgroundColor,
                     borderRadius: BorderRadius.only(
@@ -206,15 +207,14 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
                       ),
                       color: theme.dialogBackgroundColor,
                       child: ListBody(
-                        children: state.response?.predictions
-                                .map(
-                                  (p) => PredictionTile(
-                                    prediction: p,
-                                    onTap: Navigator.of(context).pop,
-                                  ),
-                                )
-                                .toList(growable: false) ??
-                            const [],
+                        children: response.predictions
+                            .map(
+                              (p) => PredictionTile(
+                                prediction: p,
+                                onTap: Navigator.of(context).pop,
+                              ),
+                            )
+                            .toList(growable: false),
                       ),
                     ),
                   );
@@ -295,19 +295,20 @@ class PlacesAutocompleteResult extends StatelessWidget {
       initialData: state._state$.value,
       builder: (context, snapshot) {
         final state = snapshot.requireData;
+        final response = state.response;
 
         if (state.text.isEmpty ||
-            state.response == null ||
-            state.response!.predictions.isEmpty) {
-          final children = <Widget>[];
-          if (state.isSearching) {
-            children.add(_Loader());
-          }
-          children.add(logo ?? const PoweredByGoogleImage());
-          return Stack(children: children);
+            response == null ||
+            response.predictions.isEmpty) {
+          return Stack(
+            children: [
+              if (state.isSearching) _Loader(),
+              logo ?? const PoweredByGoogleImage()
+            ],
+          );
         }
         return PredictionsListView(
-          predictions: state.response?.predictions ?? const [],
+          predictions: response.predictions,
           onTap: onTap,
         );
       },
