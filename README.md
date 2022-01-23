@@ -14,7 +14,7 @@ Google places autocomplete widgets for flutter.
 - Updated dependencies to latest release.
 - Refactoring by using **RxDart** for more power.
 - Fixed many issues.
-- Applied [pedantic](https://pub.dev/packages/pedantic).
+- Applied [flutter_lints](https://pub.dev/packages/flutter_lints).
 - Refactored example, migrated to Android v2 embedding.
 
 ```yaml
