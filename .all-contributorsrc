@@ -1,0 +1,34 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "hoc081098",
+      "name": "Petrus Nguyễn Thái Học",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36917223?v=4",
+      "profile": "https://www.linkedin.com/in/hoc081098/",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "corentingiraud",
+      "name": "Corentin Giraud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29222996?v=4",
+      "profile": "https://corentin.giraud.dev/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "flutter_google_places",
+  "projectOwner": "hoc081098",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

@@ -32,6 +32,11 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   final Duration? debounce;
   final Map<String, String>? headers;
 
+  /// This defines the space between the screen's edges and the dialog.
+  /// This is only used in Mode.overlay.
+  final EdgeInsets? insetPadding;
+  final Widget? backArrowIcon;
+
   /// Decoration for search text field
   final InputDecoration? textDecoration;
 
@@ -58,6 +63,8 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       required this.apiKey,
       this.mode = Mode.fullscreen,
       this.hint = 'Search',
+      this.insetPadding,
+      this.backArrowIcon,
       this.overlayBorderRadius,
       this.offset,
       this.location,
@@ -135,6 +142,7 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               IconButton(
+                padding: const EdgeInsets.all(8.0).copyWith(top: 12.0),
                 color: theme.brightness == Brightness.light
                     ? Colors.black45
                     : null,
@@ -145,7 +153,7 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                  padding: const EdgeInsets.only(right: 8.0, left: 10.0),
                   child: _textField(context),
                 ),
               ),
@@ -220,14 +228,22 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
 
     if (Theme.of(context).platform == TargetPlatform.iOS) {
       return Padding(
-          padding: const EdgeInsets.only(top: 8.0), child: container);
+          padding: widget.insetPadding ?? const EdgeInsets.only(top: 8.0),
+          child: container);
     }
-    return container;
+
+    return Padding(
+      padding: widget.insetPadding ?? EdgeInsets.zero,
+      child: container,
+    );
   }
 
-  Icon get _iconBack => Theme.of(context).platform == TargetPlatform.iOS
-      ? const Icon(Icons.arrow_back_ios)
-      : const Icon(Icons.arrow_back);
+  Widget get _iconBack {
+    if (widget.backArrowIcon != null) return widget.backArrowIcon!;
+    return Theme.of(context).platform == TargetPlatform.iOS
+        ? const Icon(Icons.arrow_back_ios)
+        : const Icon(Icons.arrow_back);
+  }
 
   Widget _textField(BuildContext context) => TextField(
         controller: _queryTextController,
@@ -604,8 +620,11 @@ abstract class PlacesAutocomplete {
       Map<String, String>? headers,
       InputDecoration? textDecoration,
       TextStyle? textStyle,
-      Color? cursorColor}) {
-    Widget builder(BuildContext context) => PlacesAutocompleteWidget(
+      Color? cursorColor,
+      EdgeInsets? insetPadding,
+      Widget? backArrowIcon}) {
+    PlacesAutocompleteWidget builder(BuildContext context) =>
+        PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
           overlayBorderRadius: overlayBorderRadius,
@@ -630,6 +649,8 @@ abstract class PlacesAutocomplete {
           textDecoration: textDecoration,
           textStyle: textStyle,
           cursorColor: cursorColor,
+          insetPadding: insetPadding,
+          backArrowIcon: backArrowIcon,
         );
 
     if (mode == Mode.overlay) {
