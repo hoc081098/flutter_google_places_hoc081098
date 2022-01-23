@@ -1,5 +1,22 @@
 # flutter_google_places_hoc081098 changelog
 
+## 1.0.1 - Jan 24, 2022
+
+- Change Dart SDK constraint to `>=2.14.0 <3.0.0` and Flutter constraint to `>=2.5.0`.
+
+- Update dependencies to latest release
+    - `rxdart: ^0.27.3`
+    - `google_api_headers: ^1.1.1`
+    - `http: ^0.13.4`
+
+- Add `insetPadding` and `backArrowIcon` field (thanks to [@corentingiraud](https://github.com/corentingiraud)).
+    - `insetPadding`: used to configure the padding around the dialog in overlay mode.
+    - `backArrowIcon`: used to configure the back arrow icon.
+
+- Refactor internal implementation.
+
+- Internal: migrated from `pedantic` to `lints` and `flutter_lints`.
+
 ## 1.0.0-nullsafety.5 - Sep 23, 2021
 
 - Set Flutter constraint `>=2.2.0`.
@@ -20,30 +37,31 @@
 
 ## 1.0.0-nullsafety.2 - May 9, 2021
 
--   Update dependencies to latest release
-    -   `google_maps_webservice: ^0.0.20-nullsafety.5`
-    -   `http: ^0.13.3`
-    -   `rxdart: ^0.27.0`
-    -   `listenable_stream: ^1.1.0`
+- Update dependencies to latest release
+    - `google_maps_webservice: ^0.0.20-nullsafety.5`
+    - `http: ^0.13.3`
+    - `rxdart: ^0.27.0`
+    - `listenable_stream: ^1.1.0`
 
 ## 1.0.0-nullsafety.1 - Apr 02, 2021
 
--   Add `headers` param to `PlacesAutocomplete.show`, `PlacesAutocompleteWidget`, `PlacesAutocompleteField` and `PlacesAutocompleteFormField`.
--   Change `apiKey` to nullable string (when using a proxy to request Google APIs, the `apiKey` is added on the proxy itself, 
-    consequently the `apiKey` should be `null`) (thanks to [@corentingiraud](https://github.com/corentingiraud)).
+- Add `headers` param to `PlacesAutocomplete.show`, `PlacesAutocompleteWidget`, `PlacesAutocompleteField`
+  and `PlacesAutocompleteFormField`.
+- Change `apiKey` to nullable string (when using a proxy to request Google APIs, the `apiKey` is added on the proxy
+  itself, consequently the `apiKey` should be `null`) (thanks to [@corentingiraud](https://github.com/corentingiraud)).
 
 ## 1.0.0-nullsafety.0 - Mar 18, 2021
 
--   Initial version of `flutter_google_places_hoc081098`.
-    Forked from [fluttercommunity/flutter_google_places](https://github.com/fluttercommunity/flutter_google_places).
--   Opt into **null safety**.
--   Sdk constraints: `>=2.12.0 <3.0.0`.
--   Compatible with **flutter 2.0.0 stable**.
--   Updated dependencies to latest release.
--   Refactoring by using **RxDart** for more power.
--   Fixed many issues.
--   Applied [pedantic](https://pub.dev/packages/pedantic).
--   Refactored example, migrated it to Android v2 embedding.
+- Initial version of `flutter_google_places_hoc081098`. Forked
+  from [fluttercommunity/flutter_google_places](https://github.com/fluttercommunity/flutter_google_places).
+- Opt into **null safety**.
+- Sdk constraints: `>=2.12.0 <3.0.0`.
+- Compatible with **flutter 2.0.0 stable**.
+- Updated dependencies to latest release.
+- Refactoring by using **RxDart** for more power.
+- Fixed many issues.
+- Applied [pedantic](https://pub.dev/packages/pedantic).
+- Refactored example, migrated it to Android v2 embedding.
 
 ----------
 
@@ -52,9 +70,9 @@
 ## 0.2.8
 
 - Fix pub.dev complaints
-  - Remove unsecure links
-  - Replace deprecated `autovalidate` bool with `AutovalidateMode`
-  - Formatted with dartfmt
+    - Remove unsecure links
+    - Replace deprecated `autovalidate` bool with `AutovalidateMode`
+    - Formatted with dartfmt
 
 ## 0.2.7
 
