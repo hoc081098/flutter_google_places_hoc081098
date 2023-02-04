@@ -66,6 +66,9 @@ class PlacesAutocompleteFormField extends FormField<String> {
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     Map<String, String>? headers,
+    BorderRadius? overlayBorderRadius,
+    TextStyle? textStyle,
+    TextStyle? textStyleFormField,
   })  : assert(initialValue == null || controller == null),
         super(
           key: key,
@@ -100,6 +103,9 @@ class PlacesAutocompleteFormField extends FormField<String> {
               onChanged: state.didChange,
               onError: onError,
               headers: headers,
+              overlayBorderRadius: overlayBorderRadius,
+              textStyle: textStyle,
+              textStyleFormField: textStyleFormField,
             );
           },
         );
