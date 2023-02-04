@@ -39,7 +39,9 @@ class _CustomSearchScaffoldState extends PlacesAutocompleteState {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [FlutterLogo()],
         ),
-        resultTextStyle: Theme.of(context).textTheme.titleMedium,
+        // TODO: Since we supports Flutter >= 2.8.0
+        // ignore: deprecated_member_use
+        resultTextStyle: Theme.of(context).textTheme.subtitle1,
       ),
     );
   }
