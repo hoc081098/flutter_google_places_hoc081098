@@ -60,6 +60,9 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   /// or custom configuration
   final Client? httpClient;
 
+  /// Text style for each result's text.
+  final TextStyle? resultTextStyle;
+
   PlacesAutocompleteWidget(
       {Key? key,
       required this.apiKey,
@@ -87,7 +90,8 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       this.headers,
       this.textDecoration,
       this.textStyle,
-      this.cursorColor})
+      this.cursorColor,
+      this.resultTextStyle})
       : super(key: key) {
     if (apiKey == null && proxyBaseUrl == null) {
       throw ArgumentError(
@@ -118,6 +122,7 @@ class _PlacesAutocompleteScaffoldState extends PlacesAutocompleteState {
     final body = PlacesAutocompleteResult(
       onTap: Navigator.of(context).pop,
       logo: widget.logo,
+      resultTextStyle: widget.resultTextStyle,
     );
     return Scaffold(appBar: appBar, body: body);
   }
@@ -212,6 +217,7 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
                               (p) => PredictionTile(
                                 prediction: p,
                                 onTap: Navigator.of(context).pop,
+                                resultTextStyle: widget.resultTextStyle,
                               ),
                             )
                             .toList(growable: false),
@@ -281,9 +287,10 @@ class _Loader extends StatelessWidget {
 class PlacesAutocompleteResult extends StatelessWidget {
   final ValueChanged<Prediction> onTap;
   final Widget? logo;
+  final TextStyle? resultTextStyle;
 
   const PlacesAutocompleteResult(
-      {Key? key, required this.onTap, required this.logo})
+      {Key? key, required this.onTap, required this.logo, this.resultTextStyle})
       : super(key: key);
 
   @override
@@ -308,6 +315,7 @@ class PlacesAutocompleteResult extends StatelessWidget {
         return PredictionsListView(
           predictions: response.predictions,
           onTap: onTap,
+          resultTextStyle: resultTextStyle,
         );
       },
     );
@@ -403,16 +411,24 @@ class PoweredByGoogleImage extends StatelessWidget {
 class PredictionsListView extends StatelessWidget {
   final List<Prediction> predictions;
   final ValueChanged<Prediction> onTap;
+  final TextStyle? resultTextStyle;
 
   const PredictionsListView(
-      {Key? key, required this.predictions, required this.onTap})
+      {Key? key,
+      required this.predictions,
+      required this.onTap,
+      this.resultTextStyle})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: predictions
-          .map((Prediction p) => PredictionTile(prediction: p, onTap: onTap))
+          .map((Prediction p) => PredictionTile(
+                prediction: p,
+                onTap: onTap,
+                resultTextStyle: resultTextStyle,
+              ))
           .toList(growable: false),
     );
   }
@@ -421,16 +437,23 @@ class PredictionsListView extends StatelessWidget {
 class PredictionTile extends StatelessWidget {
   final Prediction prediction;
   final ValueChanged<Prediction> onTap;
+  final TextStyle? resultTextStyle;
 
   const PredictionTile(
-      {Key? key, required this.prediction, required this.onTap})
+      {Key? key,
+      required this.prediction,
+      required this.onTap,
+      this.resultTextStyle})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: const Icon(Icons.location_on),
-      title: Text(prediction.description ?? ''),
+      title: Text(
+        prediction.description ?? '',
+        style: resultTextStyle,
+      ),
       onTap: () => onTap(prediction),
     );
   }
@@ -624,7 +647,8 @@ abstract class PlacesAutocomplete {
       TextStyle? textStyle,
       Color? cursorColor,
       EdgeInsets? insetPadding,
-      Widget? backArrowIcon}) {
+      Widget? backArrowIcon,
+      TextStyle? resultTextStyle}) {
     PlacesAutocompleteWidget builder(BuildContext context) =>
         PlacesAutocompleteWidget(
           apiKey: apiKey,
@@ -653,6 +677,7 @@ abstract class PlacesAutocomplete {
           cursorColor: cursorColor,
           insetPadding: insetPadding,
           backArrowIcon: backArrowIcon,
+          resultTextStyle: resultTextStyle,
         );
 
     if (mode == Mode.overlay) {
