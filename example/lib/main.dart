@@ -28,6 +28,7 @@ final customTheme = ThemeData(
       horizontal: 10.00,
     ),
   ),
+  useMaterial3: true,
 );
 
 class RoutesWidget extends StatelessWidget {
