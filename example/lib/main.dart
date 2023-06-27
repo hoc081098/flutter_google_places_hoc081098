@@ -124,9 +124,7 @@ class _MyAppState extends State<MyApp> {
       mode: _mode,
       language: 'fr',
       components: [const Component(Component.country, 'fr')],
-      // TODO: Since we supports Flutter >= 2.8.0
-      // ignore: deprecated_member_use
-      resultTextStyle: Theme.of(context).textTheme.subtitle1,
+      resultTextStyle: Theme.of(context).textTheme.titleMedium,
     );
 
     await displayPrediction(p, ScaffoldMessenger.of(context));
