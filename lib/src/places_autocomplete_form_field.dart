@@ -117,7 +117,7 @@ class PlacesAutocompleteFormField extends FormField<String> {
   final TextEditingController? controller;
 
   @override
-  _TextFormFieldState createState() => _TextFormFieldState();
+  FormFieldState<String> createState() => _TextFormFieldState();
 }
 
 class _TextFormFieldState extends FormFieldState<String> {

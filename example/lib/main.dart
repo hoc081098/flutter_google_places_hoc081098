@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
 import 'custom.dart';
@@ -122,7 +123,7 @@ class _MyAppState extends State<MyApp> {
       onError: onError,
       mode: _mode,
       language: 'fr',
-      components: [Component(Component.country, 'fr')],
+      components: [const Component(Component.country, 'fr')],
       // TODO: Since we supports Flutter >= 2.8.0
       // ignore: deprecated_member_use
       resultTextStyle: Theme.of(context).textTheme.subtitle1,

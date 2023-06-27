@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
 
 import 'core.dart';
 import 'utils.dart';
@@ -535,6 +536,7 @@ class GoogleMapsPlaces extends GoogleWebService {
 }
 
 @JsonSerializable()
+@immutable
 class PlacesSearchResponse extends GoogleResponseStatus {
   @JsonKey(defaultValue: [])
   final List<PlacesSearchResult> results;
@@ -560,6 +562,7 @@ class PlacesSearchResponse extends GoogleResponseStatus {
 }
 
 @JsonSerializable()
+@immutable
 class PlacesSearchResult {
   final String? icon;
   final Geometry? geometry;
@@ -601,7 +604,7 @@ class PlacesSearchResult {
 
   final String reference;
 
-  PlacesSearchResult({
+  const PlacesSearchResult({
     this.id,
     required this.reference,
     required this.name,
@@ -626,6 +629,7 @@ class PlacesSearchResult {
 }
 
 @JsonSerializable()
+@immutable
 class PlaceDetails {
   /// JSON address_components
   @JsonKey(defaultValue: <AddressComponent>[])
@@ -684,7 +688,7 @@ class PlaceDetails {
 
   final Geometry? geometry;
 
-  PlaceDetails({
+  const PlaceDetails({
     this.adrAddress,
     required this.name,
     required this.placeId,
@@ -715,6 +719,7 @@ class PlaceDetails {
 }
 
 @JsonSerializable()
+@immutable
 class OpeningHoursDetail {
   @JsonKey(defaultValue: false)
   final bool openNow;
@@ -725,7 +730,7 @@ class OpeningHoursDetail {
   @JsonKey(defaultValue: <String>[])
   final List<String> weekdayText;
 
-  OpeningHoursDetail({
+  const OpeningHoursDetail({
     this.openNow = false,
     this.periods = const <OpeningHoursPeriod>[],
     this.weekdayText = const <String>[],
@@ -737,6 +742,7 @@ class OpeningHoursDetail {
 }
 
 @JsonSerializable()
+@immutable
 class OpeningHoursPeriodDate {
   final int day;
   final String time;
@@ -747,7 +753,7 @@ class OpeningHoursPeriodDate {
 
   DateTime toDateTime() => dayTimeToDateTime(day, time);
 
-  OpeningHoursPeriodDate({required this.day, required this.time});
+  const OpeningHoursPeriodDate({required this.day, required this.time});
 
   factory OpeningHoursPeriodDate.fromJson(Map<String, dynamic> json) =>
       _$OpeningHoursPeriodDateFromJson(json);
@@ -755,11 +761,12 @@ class OpeningHoursPeriodDate {
 }
 
 @JsonSerializable()
+@immutable
 class OpeningHoursPeriod {
   final OpeningHoursPeriodDate? open;
   final OpeningHoursPeriodDate? close;
 
-  OpeningHoursPeriod({this.open, this.close});
+  const OpeningHoursPeriod({this.open, this.close});
 
   factory OpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
       _$OpeningHoursPeriodFromJson(json);
@@ -767,6 +774,7 @@ class OpeningHoursPeriod {
 }
 
 @JsonSerializable()
+@immutable
 class Photo {
   /// JSON photo_reference
   final String photoReference;
@@ -777,7 +785,7 @@ class Photo {
   @JsonKey(defaultValue: <String>[])
   final List<String> htmlAttributions;
 
-  Photo({
+  const Photo({
     required this.photoReference,
     required this.height,
     required this.width,
@@ -789,13 +797,14 @@ class Photo {
 }
 
 @JsonSerializable()
+@immutable
 class AlternativeId {
   /// JSON place_id
   final String placeId;
 
   final String scope;
 
-  AlternativeId({required this.placeId, required this.scope});
+  const AlternativeId({required this.placeId, required this.scope});
 
   factory AlternativeId.fromJson(Map<String, dynamic> json) =>
       _$AlternativeIdFromJson(json);
@@ -820,6 +829,7 @@ enum PriceLevel {
 }
 
 @JsonSerializable()
+@immutable
 class PlacesDetailsResponse extends GoogleResponseStatus {
   final PlaceDetails result;
 
@@ -843,6 +853,7 @@ class PlacesDetailsResponse extends GoogleResponseStatus {
 }
 
 @JsonSerializable()
+@immutable
 class Review {
   /// JSON author_name
   final String authorName;
@@ -864,7 +875,7 @@ class Review {
 
   final num time;
 
-  Review({
+  const Review({
     required this.authorName,
     required this.authorUrl,
     required this.language,
@@ -880,6 +891,7 @@ class Review {
 }
 
 @JsonSerializable()
+@immutable
 class PlacesAutocompleteResponse extends GoogleResponseStatus {
   @JsonKey(defaultValue: <Prediction>[])
   final List<Prediction> predictions;
@@ -899,6 +911,7 @@ class PlacesAutocompleteResponse extends GoogleResponseStatus {
 }
 
 @JsonSerializable()
+@immutable
 class Prediction {
   final String? description;
   final String? id;
@@ -921,7 +934,7 @@ class Prediction {
 
   final StructuredFormatting? structuredFormatting;
 
-  Prediction({
+  const Prediction({
     this.description,
     this.id,
     this.terms = const <Term>[],
@@ -939,11 +952,12 @@ class Prediction {
 }
 
 @JsonSerializable()
+@immutable
 class Term {
   final num offset;
   final String value;
 
-  Term({
+  const Term({
     required this.offset,
     required this.value,
   });
@@ -964,11 +978,12 @@ class Term {
 }
 
 @JsonSerializable()
+@immutable
 class MatchedSubstring {
   final num offset;
   final num length;
 
-  MatchedSubstring({
+  const MatchedSubstring({
     required this.offset,
     required this.length,
   });
@@ -990,6 +1005,7 @@ class MatchedSubstring {
 }
 
 @JsonSerializable()
+@immutable
 class StructuredFormatting {
   final String mainText;
 
@@ -997,7 +1013,7 @@ class StructuredFormatting {
   final List<MatchedSubstring> mainTextMatchedSubstrings;
   final String? secondaryText;
 
-  StructuredFormatting({
+  const StructuredFormatting({
     required this.mainText,
     this.mainTextMatchedSubstrings = const <MatchedSubstring>[],
     this.secondaryText,

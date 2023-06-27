@@ -1,13 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
 
 part 'core.g.dart';
 
 @JsonSerializable()
+@immutable
 class Location {
   final double lat;
   final double lng;
 
-  Location({
+  const Location({
     required this.lat,
     required this.lng,
   });
@@ -21,6 +23,7 @@ class Location {
 }
 
 @JsonSerializable()
+@immutable
 class Geometry {
   final Location location;
 
@@ -31,7 +34,7 @@ class Geometry {
 
   final Bounds? bounds;
 
-  Geometry({
+  const Geometry({
     required this.location,
     this.locationType,
     this.viewport,
@@ -44,11 +47,12 @@ class Geometry {
 }
 
 @JsonSerializable()
+@immutable
 class Bounds {
   final Location northeast;
   final Location southwest;
 
-  Bounds({
+  const Bounds({
     required this.northeast,
     required this.southwest,
   });
@@ -105,6 +109,7 @@ abstract class GoogleResponse<T> extends GoogleResponseStatus {
 }
 
 @JsonSerializable()
+@immutable
 class AddressComponent {
   @JsonKey(defaultValue: <String>[])
   final List<String> types;
@@ -115,7 +120,7 @@ class AddressComponent {
   /// JSON short_name
   final String shortName;
 
-  AddressComponent({
+  const AddressComponent({
     required this.types,
     required this.longName,
     required this.shortName,
@@ -126,6 +131,7 @@ class AddressComponent {
   Map<String, dynamic> toJson() => _$AddressComponentToJson(this);
 }
 
+@immutable
 class Component {
   static const route = 'route';
   static const locality = 'locality';
@@ -136,7 +142,7 @@ class Component {
   final String component;
   final String value;
 
-  Component(this.component, this.value);
+  const Component(this.component, this.value);
 
   @override
   String toString() => '$component:$value';
@@ -154,10 +160,11 @@ enum TravelMode {
 }
 
 @JsonSerializable()
+@immutable
 class _TravelMode {
   final TravelMode value;
 
-  _TravelMode(this.value);
+  const _TravelMode(this.value);
 
   // ignore: unused_element
   factory _TravelMode.fromJson(Map<String, dynamic> json) =>
@@ -183,10 +190,11 @@ enum RouteType {
 }
 
 @JsonSerializable()
+@immutable
 class _RouteType {
   final RouteType value;
 
-  _RouteType(this.value);
+  const _RouteType(this.value);
 
   // ignore: unused_element
   factory _RouteType.fromJson(Map<String, dynamic> json) =>
@@ -210,10 +218,11 @@ enum Unit {
 }
 
 @JsonSerializable()
+@immutable
 class _Unit {
   final Unit value;
 
-  _Unit(this.value);
+  const _Unit(this.value);
 
   // ignore: unused_element
   factory _Unit.fromJson(Map<String, dynamic> json) => _$_UnitFromJson(json);
@@ -238,10 +247,11 @@ enum TrafficModel {
 }
 
 @JsonSerializable()
+@immutable
 class _TrafficModel {
   final TrafficModel value;
 
-  _TrafficModel(this.value);
+  const _TrafficModel(this.value);
 
   // ignore: unused_element
   factory _TrafficModel.fromJson(Map<String, dynamic> json) =>
@@ -268,10 +278,11 @@ enum TransitMode {
 }
 
 @JsonSerializable()
+@immutable
 class _TransitMode {
   final TransitMode value;
 
-  _TransitMode(this.value);
+  const _TransitMode(this.value);
 
   // ignore: unused_element
   factory _TransitMode.fromJson(Map<String, dynamic> json) =>
@@ -297,10 +308,11 @@ enum TransitRoutingPreferences {
 }
 
 @JsonSerializable()
+@immutable
 class _TransitRoutingPreferences {
   final TransitRoutingPreferences value;
 
-  _TransitRoutingPreferences(this.value);
+  const _TransitRoutingPreferences(this.value);
 
   // ignore: unused_element
   factory _TransitRoutingPreferences.fromJson(Map<String, dynamic> json) =>
