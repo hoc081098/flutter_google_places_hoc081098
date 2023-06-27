@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../google_maps_webservice/places.dart';
+import 'google_maps_webservice/places.dart';
 
 import 'flutter_google_places.dart';
 

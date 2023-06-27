@@ -11,7 +11,7 @@ import 'package:listenable_stream/listenable_stream.dart';
 import 'package:rxdart_ext/single.dart';
 import 'package:rxdart_ext/state_stream.dart';
 
-import '../google_maps_webservice/places.dart';
+import 'google_maps_webservice/places.dart';
 
 class PlacesAutocompleteWidget extends StatefulWidget {
   /// The API key to use for the Places API.
