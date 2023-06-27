@@ -146,7 +146,7 @@ class GoogleMapsGeocoding extends GoogleWebService {
   }
 
   GeocodingResponse _decode(Response res) =>
-      GeocodingResponse.fromJson(json.decode(res.body));
+      GeocodingResponse.fromJson(json.decode(res.body) as Map<String, dynamic>);
 }
 
 @JsonSerializable()

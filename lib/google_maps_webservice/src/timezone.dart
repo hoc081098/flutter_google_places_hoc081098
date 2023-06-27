@@ -66,7 +66,7 @@ class GoogleMapsTimezone extends GoogleWebService {
   }
 
   TimezoneResponse _decode(Response res) =>
-      TimezoneResponse.fromJson(json.decode(res.body));
+      TimezoneResponse.fromJson(json.decode(res.body) as Map<String, dynamic>);
 }
 
 @JsonSerializable(fieldRename: FieldRename.none)

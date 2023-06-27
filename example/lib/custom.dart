@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
-import 'package:google_maps_webservice/places.dart';
 import 'package:uuid/uuid.dart';
 
 import 'main.dart';
@@ -35,9 +34,9 @@ class _CustomSearchScaffoldState extends PlacesAutocompleteState {
       ),
       body: PlacesAutocompleteResult(
         onTap: (p) => displayPrediction(p, ScaffoldMessenger.of(context)),
-        logo: Row(
+        logo: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [FlutterLogo()],
+          children: [FlutterLogo()],
         ),
         // TODO: Since we supports Flutter >= 2.8.0
         // ignore: deprecated_member_use

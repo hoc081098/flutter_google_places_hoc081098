@@ -35,8 +35,8 @@ class GoogleDistanceMatrix extends GoogleWebService {
     String? region,
     List<RouteType> avoids = const <RouteType>[],
     Unit? unit,
-    arrivalTime,
-    departureTime,
+    Object? /*DateTime|num*/ arrivalTime,
+    Object? /*DateTime|num|String('now')*/ departureTime,
     List<TransitMode> transitMode = const [],
     TrafficModel? trafficModel,
     TransitRoutingPreferences? transitRoutingPreference,
@@ -251,7 +251,7 @@ class GoogleDistanceMatrix extends GoogleWebService {
   }
 
   DistanceResponse _decode(Response res) =>
-      DistanceResponse.fromJson(json.decode(res.body));
+      DistanceResponse.fromJson(json.decode(res.body) as Map<String, dynamic>);
 }
 
 @JsonSerializable()

@@ -59,7 +59,8 @@ class GoogleMapsGeolocation extends GoogleWebService {
 
   Future<GeolocationResponse> currentGeolocation() async {
     return _decode(
-      await doPost(buildUrl(), json.encode({}), headers: apiHeaders),
+      await doPost(buildUrl(), json.encode(<String, dynamic>{}),
+          headers: apiHeaders),
     );
   }
 
@@ -82,7 +83,7 @@ class GoogleMapsGeolocation extends GoogleWebService {
     List<CellTower> cellTowers = const [],
     List<WifiAccessPoint> wifiAccessPoints = const [],
   }) {
-    var params = <String, dynamic>{};
+    final params = <String, dynamic>{};
 
     // All optionals
     if (homeMobileCountryCode != null) {
@@ -118,7 +119,8 @@ class GoogleMapsGeolocation extends GoogleWebService {
   }
 
   GeolocationResponse _decode(Response res) {
-    return GeolocationResponse.fromJson(json.decode(res.body));
+    return GeolocationResponse.fromJson(
+        json.decode(res.body) as Map<String, dynamic>);
   }
 }
 

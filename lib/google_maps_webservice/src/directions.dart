@@ -246,8 +246,8 @@ class GoogleMapsDirections extends GoogleWebService {
     return url.replace(queryParameters: params).toString();
   }
 
-  DirectionsResponse _decode(Response res) =>
-      DirectionsResponse.fromJson(json.decode(res.body));
+  DirectionsResponse _decode(Response res) => DirectionsResponse.fromJson(
+      json.decode(res.body) as Map<String, dynamic>);
 }
 
 @JsonSerializable()
@@ -337,7 +337,7 @@ class Route {
   /// JSON overview_polyline
   final Polyline overviewPolyline;
 
-  final List warnings;
+  final List<dynamic> warnings;
 
   /// JSON waypoint_order
   @JsonKey(defaultValue: <num>[])

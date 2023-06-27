@@ -90,7 +90,7 @@ abstract class GoogleResponseStatus {
 }
 
 abstract class GoogleResponseList<T> extends GoogleResponseStatus {
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<T> results;
 
   GoogleResponseList(String status, String? errorMessage, this.results)

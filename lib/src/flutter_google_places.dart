@@ -6,11 +6,12 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_pattern/flutter_bloc_pattern.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:google_maps_webservice/places.dart';
 import 'package:http/http.dart';
 import 'package:listenable_stream/listenable_stream.dart';
 import 'package:rxdart_ext/single.dart';
 import 'package:rxdart_ext/state_stream.dart';
+
+import '../google_maps_webservice/places.dart';
 
 class PlacesAutocompleteWidget extends StatefulWidget {
   /// The API key to use for the Places API.
@@ -429,7 +430,7 @@ class AppBarPlacesAutoCompleteTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AppBarPlacesAutoCompleteTextFieldState createState() =>
+  State<AppBarPlacesAutoCompleteTextField> createState() =>
       _AppBarPlacesAutoCompleteTextFieldState();
 }
 
@@ -574,7 +575,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
                     widget.debounce ?? const Duration(milliseconds: 300))
                 .where((s) => s.isNotEmpty)
                 .distinct()
-                .switchMap((s) => doSearch(s, places)),
+                .switchMap((s) => _doSearch(s, places)),
           )
           .publishState(const _SearchState(false, null, ''));
 
@@ -614,7 +615,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
     );
   }
 
-  Stream<_SearchState> doSearch(String value, GoogleMapsPlaces places) async* {
+  Stream<_SearchState> _doSearch(String value, GoogleMapsPlaces places) async* {
     yield _SearchState(true, null, value);
 
     assert(() {
