@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 part 'core.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class Location {
   final double lat;
@@ -22,7 +22,7 @@ class Location {
   String toString() => '$lat,$lng';
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class Geometry {
   final Location location;
@@ -46,7 +46,7 @@ class Geometry {
   Map<String, dynamic> toJson() => _$GeometryToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class Bounds {
   final Location northeast;
@@ -108,7 +108,7 @@ abstract class GoogleResponse<T> extends GoogleResponseStatus {
       : super(status: status, errorMessage: errorMessage);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class AddressComponent {
   @JsonKey(defaultValue: <Never>[])
@@ -159,7 +159,7 @@ enum TravelMode {
   transit,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _TravelMode {
   final TravelMode value;
@@ -189,7 +189,7 @@ enum RouteType {
   indoor,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _RouteType {
   final RouteType value;
@@ -217,7 +217,7 @@ enum Unit {
   imperial,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _Unit {
   final Unit value;
@@ -246,7 +246,7 @@ enum TrafficModel {
   optimistic,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _TrafficModel {
   final TrafficModel value;
@@ -277,7 +277,7 @@ enum TransitMode {
   rail,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _TransitMode {
   final TransitMode value;
@@ -307,7 +307,7 @@ enum TransitRoutingPreferences {
   fewerTransfers,
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 @immutable
 class _TransitRoutingPreferences {
   final TransitRoutingPreferences value;

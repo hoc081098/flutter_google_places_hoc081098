@@ -18,7 +18,7 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
 
 Geometry _$GeometryFromJson(Map<String, dynamic> json) => Geometry(
       location: Location.fromJson(json['location'] as Map<String, dynamic>),
-      locationType: json['locationType'] as String?,
+      locationType: json['location_type'] as String?,
       viewport: json['viewport'] == null
           ? null
           : Bounds.fromJson(json['viewport'] as Map<String, dynamic>),
@@ -29,7 +29,7 @@ Geometry _$GeometryFromJson(Map<String, dynamic> json) => Geometry(
 
 Map<String, dynamic> _$GeometryToJson(Geometry instance) => <String, dynamic>{
       'location': instance.location,
-      'locationType': instance.locationType,
+      'location_type': instance.locationType,
       'viewport': instance.viewport,
       'bounds': instance.bounds,
     };
@@ -49,15 +49,15 @@ AddressComponent _$AddressComponentFromJson(Map<String, dynamic> json) =>
       types:
           (json['types'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      longName: json['longName'] as String,
-      shortName: json['shortName'] as String,
+      longName: json['long_name'] as String,
+      shortName: json['short_name'] as String,
     );
 
 Map<String, dynamic> _$AddressComponentToJson(AddressComponent instance) =>
     <String, dynamic>{
       'types': instance.types,
-      'longName': instance.longName,
-      'shortName': instance.shortName,
+      'long_name': instance.longName,
+      'short_name': instance.shortName,
     };
 
 _TravelMode _$TravelModeFromJson(Map<String, dynamic> json) => _TravelMode(
