@@ -538,11 +538,11 @@ class GoogleMapsPlaces extends GoogleWebService {
 @JsonSerializable()
 @immutable
 class PlacesSearchResponse extends GoogleResponseStatus {
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<PlacesSearchResult> results;
 
   /// JSON html_attributions
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<String> htmlAttributions;
 
   /// JSON next_page_token
@@ -571,7 +571,7 @@ class PlacesSearchResult {
   /// JSON opening_hours
   final OpeningHoursDetail? openingHours;
 
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<Photo> photos;
 
   /// JSON place_id
@@ -580,7 +580,7 @@ class PlacesSearchResult {
   final String? scope;
 
   /// JSON alt_ids
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<AlternativeId> altIds;
 
   /// JSON price_level
@@ -588,7 +588,7 @@ class PlacesSearchResult {
 
   final num? rating;
 
-  @JsonKey(defaultValue: [])
+  @JsonKey(defaultValue: <Never>[])
   final List<String> types;
 
   final String? vicinity;

@@ -111,7 +111,7 @@ abstract class GoogleResponse<T> extends GoogleResponseStatus {
 @JsonSerializable()
 @immutable
 class AddressComponent {
-  @JsonKey(defaultValue: <String>[])
+  @JsonKey(defaultValue: <Never>[])
   final List<String> types;
 
   /// JSON long_name
