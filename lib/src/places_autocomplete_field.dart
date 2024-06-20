@@ -37,7 +37,7 @@ class PlacesAutocompleteField extends StatefulWidget {
   /// by the decoration to save space for the labels), set the [decoration] to
   /// null.
   const PlacesAutocompleteField({
-    Key? key,
+    super.key,
     required this.apiKey,
     this.controller,
     this.leading,
@@ -61,7 +61,7 @@ class PlacesAutocompleteField extends StatefulWidget {
     this.overlayBorderRadius,
     this.textStyle,
     this.textStyleFormField,
-  }) : super(key: key);
+  });
 
   /// Controls the text being edited.
   ///

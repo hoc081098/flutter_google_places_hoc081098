@@ -14,28 +14,28 @@ topics:
   - flutter-google-places
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.19.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  google_api_headers: ^2.0.0
-  http: ^1.0.0
-  rxdart: ^0.27.7
-  rxdart_ext: ^0.2.9
-  listenable_stream: ^1.1.0
-  collection: ^1.17.1
-  flutter_bloc_pattern: ^2.3.0
-  json_annotation: ^4.8.1
-  meta: ^1.7.0
+  google_api_headers: ^4.0.3
+  http: ^1.2.1
+  rxdart: ^0.28.0
+  rxdart_ext: ^0.3.0
+  listenable_stream: ^2.0.1
+  collection: ^1.18.0
+  flutter_bloc_pattern: ^3.0.0
+  json_annotation: ^4.9.0
+  meta: ^1.11.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  build_runner: ^2.4.5
-  json_serializable: ^6.7.0
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
 
 flutter:
   assets:

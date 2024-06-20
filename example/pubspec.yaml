@@ -4,19 +4,19 @@ publish_to: none
 description: A new Flutter project.
 
 environment:
-  sdk: '>=2.14.0 <3.0.0'
-  flutter: '>=2.8.0'
+  sdk: '>=3.4.3 <4.0.0'
+  flutter: '>=3.22.2'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_google_places_hoc081098:
     path: ../
-  google_api_headers: ^2.0.0
-  uuid: ^3.0.7
+  google_api_headers: ^4.1.2
+  uuid: ^4.4.0
 
 dev_dependencies:
-  flutter_lints: ^1.0.4
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
 

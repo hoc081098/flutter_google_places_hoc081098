@@ -9,9 +9,8 @@ import 'main.dart';
 // basically your widget need to extends [GooglePlacesAutocompleteWidget]
 // and your state [GooglePlacesAutocompleteState]
 class CustomSearchScaffold extends PlacesAutocompleteWidget {
-  CustomSearchScaffold({Key? key})
+  CustomSearchScaffold({super.key})
       : super(
-          key: key,
           apiKey: kGoogleApiKey,
           sessionToken: const Uuid().v4(),
           language: 'en',
@@ -19,7 +18,7 @@ class CustomSearchScaffold extends PlacesAutocompleteWidget {
         );
 
   @override
-  _CustomSearchScaffoldState createState() => _CustomSearchScaffoldState();
+  PlacesAutocompleteState createState() => _CustomSearchScaffoldState();
 }
 
 class _CustomSearchScaffoldState extends PlacesAutocompleteState {

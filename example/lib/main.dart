@@ -32,7 +32,7 @@ final customTheme = ThemeData(
 );
 
 class RoutesWidget extends StatelessWidget {
-  const RoutesWidget({Key? key}) : super(key: key);
+  const RoutesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +48,10 @@ class RoutesWidget extends StatelessWidget {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -127,7 +127,9 @@ class _MyAppState extends State<MyApp> {
       components: [const Component(Component.country, 'fr')],
       resultTextStyle: Theme.of(context).textTheme.titleMedium,
     );
-
+    if (!mounted) {
+      return;
+    }
     await displayPrediction(p, ScaffoldMessenger.of(context));
   }
 }
@@ -139,12 +141,12 @@ Future<void> displayPrediction(
   }
 
   // get detail (lat/lng)
-  final _places = GoogleMapsPlaces(
+  final places = GoogleMapsPlaces(
     apiKey: kGoogleApiKey,
     apiHeaders: await const GoogleApiHeaders().getHeaders(),
   );
 
-  final detail = await _places.getDetailsByPlaceId(p.placeId!);
+  final detail = await places.getDetailsByPlaceId(p.placeId!);
   final geometry = detail.result.geometry!;
   final lat = geometry.location.lat;
   final lng = geometry.location.lng;
