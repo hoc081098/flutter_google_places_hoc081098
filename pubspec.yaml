@@ -14,7 +14,7 @@ topics:
   - flutter-google-places
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
+  sdk: '>=3.3.1 <4.0.0'
   flutter: '>=3.19.6'
 
 dependencies:
