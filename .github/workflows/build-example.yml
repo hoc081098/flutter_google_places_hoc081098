@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ '3.19.3' ]
+        version: [ '3.19.6', '3.22.0' ]
     defaults:
       run:
         working-directory: ./example
@@ -78,4 +78,4 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --no-shrink
+        run: flutter build apk --debug --no-shrink
