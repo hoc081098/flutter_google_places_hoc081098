@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
 
       - uses: subosito/flutter-action@v2.4.0
         with:
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ '3.10.0' ]
+        version: [ '3.19.0' ]
     defaults:
       run:
         working-directory: ./example
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
 
       - uses: subosito/flutter-action@v2.4.0
         with:
