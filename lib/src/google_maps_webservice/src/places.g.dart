@@ -186,7 +186,7 @@ Map<String, dynamic> _$OpeningHoursDetailToJson(OpeningHoursDetail instance) =>
 OpeningHoursPeriodDate _$OpeningHoursPeriodDateFromJson(
         Map<String, dynamic> json) =>
     OpeningHoursPeriodDate(
-      day: json['day'] as int,
+      day: (json['day'] as num).toInt(),
       time: json['time'] as String,
     );
 
@@ -313,7 +313,7 @@ Prediction _$PredictionFromJson(Map<String, dynamic> json) => Prediction(
               ?.map((e) => Term.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      distanceMeters: json['distance_meters'] as int?,
+      distanceMeters: (json['distance_meters'] as num?)?.toInt(),
       placeId: json['place_id'] as String?,
       reference: json['reference'] as String?,
       types:
